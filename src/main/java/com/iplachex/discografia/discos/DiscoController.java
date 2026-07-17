@@ -43,4 +43,25 @@ public class DiscoController {
     public ResponseEntity<List<Disco>> HandleGetDiscosByArtistaRequest(@PathVariable String id) {
         return ResponseEntity.ok(discoRepository.findDiscosByIdArtista(id));
     }
+
+    @PutMapping(value = "/disco/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> HandleUpdateDiscoRequest(@PathVariable String id, @RequestBody Disco disco) {
+        if (!discoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        if (!artistaRepository.existsById(disco.idArtista)) {
+            return ResponseEntity.notFound().build();
+        }
+        disco._id = id;
+        return ResponseEntity.ok(discoRepository.save(disco));
+    }
+
+    @DeleteMapping(value = "/disco/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> HandleDeleteDiscoRequest(@PathVariable String id) {
+        if (!discoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        discoRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

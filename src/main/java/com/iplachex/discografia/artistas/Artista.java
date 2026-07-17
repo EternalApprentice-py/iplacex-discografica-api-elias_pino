@@ -23,4 +23,10 @@ public class Artista {
 
     @Field("estaActivo")
     public boolean estaActivo;
+
+    @Field("paisOrigen")
+    public String paisOrigen;
+
+    @Field("sitioWeb")
+    public String sitioWeb;
 }

@@ -23,4 +23,10 @@ public class Disco {
 
     @Field("canciones")
     public List<String> canciones;
+
+    @Field("duracionMinutos")
+    public int duracionMinutos;
+
+    @Field("formato")
+    public String formato;
 }
